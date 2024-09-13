@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 CHOICE_GENRE = [
-        ('FPS','Стрелялка'),
-        ('RPG','Ролевая игра'),
-        ('RTS','Стратегия в реальном времени'),
-        ('ARC','Аркада'),
-        ('SIM','Симулятор'),
-        ('ADV','Приключения'),
-    ]
+    ('FPS', 'Стрелялка'),
+    ('RPG', 'Ролевая игра'),
+    ('RTS', 'Стратегия в реальном времени'),
+    ('ARC', 'Аркада'),
+    ('SIM', 'Симулятор'),
+    ('ADV', 'Приключения'),
+]
 
 class Buyer(models.Model):
     username = models.CharField(max_length=30)
