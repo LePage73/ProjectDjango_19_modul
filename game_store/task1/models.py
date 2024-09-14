@@ -15,6 +15,8 @@ class Buyer(models.Model):
     username = models.CharField(max_length=30)
     balance = models.DecimalField(max_digits=12, decimal_places=2)
     age = models.IntegerField(default=1)
+    def __str__(self):
+        return self.username
     pass
 
 class Game(models.Model):
@@ -25,5 +27,7 @@ class Game(models.Model):
     age_limited = models.BooleanField(default=False)
     buyer = models.ManyToManyField(Buyer, related_name='games')
     genre = models.CharField(choices=CHOICE_GENRE, max_length=3)
+    def __str__(self):
+        return self.title
     pass
 
