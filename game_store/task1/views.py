@@ -20,8 +20,6 @@ MENU = {'menu': [{'menu': 'Главная', 'href': '/game_store/'},
 SALE_TITLE = {'title': 'Магазин'}
 BASKET_TITLE = {'title': 'Корзина'}
 
-USER_LIST = [buy_.username.lower() for buy_ in Buyer.objects.all()]  ####################
-
 # регистрация на сайте ######################################
 class Sign_user(View):
     my_context = {}
@@ -78,6 +76,7 @@ class Store_sale(Tmpl_store):
     def get_context_data(self, *args, **kwargs, ):
         self.my_context = {'cntxt_menu': [{'title': game.title,
                                            'description': game.description,
+                                           'genre' : [v[1] for i, v in enumerate(CHOICE_GENRE) if v[0] == game.genre].pop(),
                                            'cost': game.cost,
                                            'button': 'Купить'} for game in Game.objects.all()
                                           ]} | self.my_context
