@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <title> {{my_context.title}}</title>
+    <style>
+    .alert{color:green; height: 20px}
+    .form-group{margin: 10px 0; align:center; border: 2px; width: 150px;}
+    .form-group input{width: 150px; height: 20px; border-radius:3px; align:center;}
+    </style>
+</head>
+{% endblock %}
+<body>
+{% block pagename %}
+<h1 style="background-color:red; color:white" align="center" >{{ my_context.title }}</h1>
+{% endblock %}
+{% block menu %}
+<table align="center" style="background-color:silver">
+    <tr style="background-color:silver">
+    {% for str_ in my_context.menu %}
+        <td><a href={{str_.href}} > • {{str_.menu}}   </a></td>
+    {% endfor %}
+    </tr>
+</table>
+{% endblock %}
+{% block content %}
+{{ user }}
+    <h2 align="center">На правах рекламы</h2>
+    <p align="center"><img src= '{% static "/ad.jpg" %}'></p>
+{% endblock %}
+</body>
+</html>

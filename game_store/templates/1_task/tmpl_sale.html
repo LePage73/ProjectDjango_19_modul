@@ -1,0 +1,27 @@
+{% extends "1_task\menu.html" %}
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+{{ block.super }}
+{% endblock %}
+<body>
+{% block pagename %}
+{{ block.super }}
+{% endblock %}
+<h2>
+{% block menu %}
+{{ block.super }}
+{% endblock %}
+</h2>
+{% block content %}
+    <table width="40%" align="center" cellpadding="5">
+    {% for  str_ in my_context.cntxt_menu %}
+        <tr><td style="background-color:silver"><h3>• {{ str_.title }} </h3></td></tr>
+        <tr><td><i style="color:gray">{{ str_.description }}</i></td></tr>
+        <tr><td style="text-align:right"><h3>Цена:{{ str_.cost }}</h3></td></tr>
+        <tr><td style="text-align:right; background-color:black"><button>{{ str_.button }}</button></td></tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+</body>
+</html>

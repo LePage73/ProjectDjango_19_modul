@@ -1,0 +1,43 @@
+{% extends "1_task\menu.html" %}
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+{{ block.super }}
+{% endblock %}
+<body>
+{% block pagename %}
+{{ block.super }}
+{% endblock %}
+<h2>
+{% block menu %}
+{{ block.super }}
+{% endblock %}
+</h2>
+{% block content %}
+<table align="center" width="30%">
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <div>
+        {% for field in form %}
+        <div class="form-group">
+        <tr><td>{{field.label_tag}}
+            <div>{{field}}</div>
+            {% if field.errors%}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        </td></tr></div>
+        <tr><td><input type="submit" value="Сохранить" ></td></td>
+    </form>
+</table>
+{% endblock %}
+</body>
+</html>
+
+
+

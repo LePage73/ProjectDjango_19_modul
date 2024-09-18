@@ -1,0 +1,21 @@
+{% extends "1_task\menu.html" %}
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+{{ block.super }}
+{% endblock %}
+<body>
+{% block pagename %}
+{{ block.super }}
+{% endblock %}
+<h2>
+{% block menu %}
+{{ block.super }}
+{% endblock %}
+</h2>
+{{ user }}
+{% block content %}
+{{ block.super }}
+{% endblock %}
+</body>
+</html>

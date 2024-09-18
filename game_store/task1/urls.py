@@ -1,5 +1,5 @@
 """
-URL configuration for game_store project.
+URL configuration for UrbanDjango project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -15,10 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from task1.views import  Sign_user, Store_index, Store_sale, Store_basket,Game_Insert
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('task1.urls')),
-    # path('troubleshooting/', include('task1.urls')),
+    path('game_store/signUser/', Sign_user.as_view()),
+    path('game_store/', Store_index.as_view()),
+    path('game_store/sale/', Store_sale.as_view()),
+    path('game_store/basket/', Store_basket.as_view()),
+    path('game_store/game_insert/', Game_Insert.as_view()),
 ]
