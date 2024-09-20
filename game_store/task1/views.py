@@ -10,7 +10,7 @@ from .forms import Reg_Forms, Game_Forms
 from .models import Buyer, Game, CHOICE_GENRE
 
 # подготовим меню
-MAIN_TITLE = {'title': 'Магазин компютерных игр'}
+MAIN_TITLE = {'title': 'Магазин компьютерных игр'}
 MENU = {'menu': [{'menu': 'Главная', 'href': '/game_store/'},
                  {'menu': 'Магазин', 'href': '/game_store/sale/'},
                  {'menu': 'Корзина', 'href': '/game_store/basket/'},
@@ -30,6 +30,7 @@ class Sign_user(View):
         form = Reg_Forms(request.GET)
         self.info['form'] = form
         self.info['my_context'] = self.my_context
+        print(request)
         return render(request, self.template_name, self.info)
 
     def post(self, request): # обработка формы
