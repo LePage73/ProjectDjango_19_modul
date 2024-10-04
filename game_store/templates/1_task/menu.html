@@ -1,34 +1,34 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 {% block head %}
 <head>
     <meta charset="UTF-8">
-    <title> {{my_context.title}}</title>
-    <style>
-    .alert{color:green; height: 20px}
-    .form-group{margin: 10px 0; align:center; border: 2px; width: 150px;}
-    .form-group input{width: 150px; height: 20px; border-radius:3px; align:center;}
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>{{my_context.title}}</title>
 </head>
 {% endblock %}
-<body>
+<body >
 {% block pagename %}
-<h1 style="background-color:red; color:white" align="center" >{{ my_context.title }}</h1>
+<h1 class="nav justify-content-center">{{ my_context.title }}</h1>
 {% endblock %}
+
 {% block menu %}
-<table align="center" style="background-color:silver">
-    <tr style="background-color:silver">
-    {% for str_ in my_context.menu %}
-        <td><a href={{str_.href}} > • {{str_.menu}}   </a></td>
-    {% endfor %}
-    </tr>
-</table>
+<ul class="nav nav-tabs justify-content-center">
+{% for str_ in my_context.menu %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{str_.href}}" >{{str_.menu}}</a>
+    </li>
+{% endfor %}
+</ul>
+
 {% endblock %}
 {% block content %}
 {{ user }}
-    <h2 align="center">На правах рекламы</h2>
-    <p align="center"><img src= '{% static "/ad.jpg" %}'></p>
+    <h2 class="nav justify-content-center">На правах рекламы</h2>
+    <p class="nav justify-content-center"><img  src='{% static "/ad.jpg" %}'></p>
 {% endblock %}
 </body>
 </html>

@@ -1,6 +1,6 @@
-{% extends "1_task\menu.html" %}
+{% extends "1_task/menu.html" %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 {% block head %}
 {{ block.super }}
 {% endblock %}
@@ -8,47 +8,50 @@
 {% block pagename %}
 {{ block.super }}
 {% endblock %}
-<h2>
+
 {% block menu %}
 {{ block.super }}
 {% endblock %}
-</h2>
-{% block content %}
 
-    <table align="center" width="30%" >
+{% block content %}
+<div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
      <form method="POST">
         {% csrf_token %}
-        <div>
+        <div class="form-group">
         {% for field in form %}
-            <div class="form-group">
-            <tr>
-                <td>{{field.label_tag}}
-                    <div class="form-group">
-                        {{field}}
-                    </div>
-                    {% if field.errors%}
-                    {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        {{error}}
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                </td>
-            </tr>
+            <div class="text-muted">
+            {{field.label_tag}}
             </div>
-            {% endfor %}
+            <div>
+            {{field}}
             </div>
-    <tr><td>
-        <div class="alert alert-danger"><input type="submit" value="Зарегистрироваться"></div>
-    </td></tr>
-    {% for str_ in error %}
-        <tr><td style="color:red">Ошибка: {{str_}} </td></tr>
-    {% endfor %}
-    </form>
-    </table>
-
+            {% if field.errors%}
+                {% for error in field.errors %}
+                <div class="text-danger">
+                {{error}}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        </div>
+        <div class="d-grid gap-2">
+            <input class="btn btn-outline-dark" type="submit" value="Зарегистрироваться"></div>
+     <div class="form-group">
+     {% for str_ in error %}
+        Ошибка: {{str_}}
+     {% endfor %}
+     </div>
+     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
-
 </body>
 </html>
 

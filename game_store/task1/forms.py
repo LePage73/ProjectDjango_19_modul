@@ -1,17 +1,13 @@
 from django import forms
 from django.forms import Field
-
-CHOICE_GENRE = [
-    ('FPS', 'Стрелялка'),
-    ('RPG', 'Ролевая игра'),
-    ('RTS', 'Стратегия в реальном времени'),
-    ('ARC', 'Аркада'),
-    ('SIM', 'Симулятор'),
-    ('ADV', 'Приключения'),
-]
+from .def_setting import CHOICE_GENRE, GAME_PER_PAGE
 
 # задаем значения полей ошибок по умолчанию
-Field.default_error_messages = {'required': u'* обязательное поле', 'min_length': u'недостаточно символов'}
+Field.default_error_messages = {'required': u'* обязательное поле',
+                                'min_length': u'недостаточно символов'
+                                }
+
+
 #######################################################################
 # required - показывается, если данное поле обязательно;
 # max_length - если превышено максимальное количество символов в символьном поле / в случае с файлами - длина имени файла;
@@ -30,16 +26,23 @@ Field.default_error_messages = {'required': u'* обязательное пол�
 # invalid_link - для URLField - вызывается, если данного url не существует.
 
 class Reg_Forms(forms.Form):
-    username = forms.CharField(max_length=30, label='Ваш логин', required=True)
-    password = forms.CharField(widget=forms.PasswordInput, min_length=8, label='Ваш пароль', required=True)
-    confirm_password = forms.CharField(widget=forms.PasswordInput, min_length=8, label='Подтверждение пароля', required=True)
-    age = forms.DecimalField(min_value=18, max_digits=3, max_value=125, decimal_places=0, label='Ваш возраст', required=True)
+    username = forms.CharField(max_length=30, label='Ваш логин', required=True, initial='Ваш логин' )
+    password = forms.CharField(widget=forms.PasswordInput, min_length=8, label='Ваш пароль', required=True, initial='Ваш пароль')
+    confirm_password = forms.CharField(widget=forms.PasswordInput, min_length=8, label='Подтверждение пароля',
+                                       required=True, initial='Подтверждение пароля')
+    age = forms.DecimalField(min_value=18, max_digits=3, max_value=125, decimal_places=0, label='Ваш возраст',
+                             required=True)
+
 
 class Game_Forms(forms.Form):
-    title = forms.CharField(max_length=100,label='Название игры', required=True)
+    title = forms.CharField(max_length=100, label='Название игры', required=True)
     cost = forms.DecimalField(max_digits=7, decimal_places=2, label='Цена', required=True)
     size = forms.DecimalField(max_digits=12, decimal_places=3, label='Размер', required=True)
     description = forms.CharField(widget=forms.Textarea, label='Описание')
-    age_limited = forms.BooleanField(label='Возрастное ограничение',required=False)
-    genre = forms.ChoiceField(choices=CHOICE_GENRE, label='Жанр игры', required=True)
+    age_limited = forms.BooleanField(label='Возрастное ограничение', required=False)
+    genre = forms.ChoiceField(choices=CHOICE_GENRE, label='Жанр игры', required=False)
 
+
+class Game_per_Page(forms.Form):
+    game_p_page = forms.ChoiceField(choices=GAME_PER_PAGE, required=False, label='',
+                                      widget=forms.Select(attrs={'onchange': 'games_form.submit();','class': 'btn btn-light'}))

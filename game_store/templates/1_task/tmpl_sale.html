@@ -14,14 +14,86 @@
 {% endblock %}
 </h2>
 {% block content %}
-    <table width="40%" align="center" cellpadding="5">
-    {% for  str_ in my_context.cntxt_menu %}
-        <tr><td style="background-color:silver" colspan="2"><h3>• {{ str_.title }} </h3></td></tr>
-        <tr><td><i style="color:gray" colspan="2">{{ str_.description }}</i></td></tr>
-        <tr><td style="text-align:left">{{ str_.genre }}</td><td style="text-align:right"><h3> Цена:{{ str_.cost }}</h3></td></tr>
-        <tr><td style="text-align:right; background-color:black" colspan="2"><button>{{ str_.button }}</button></td></tr>
-    {% endfor %}
-    </table>
+
+<div class="container mt-1" >
+    <div class="row text-center justify-content-center">
+        <div class="col col-md-12">
+            <form method="POST" id="games_form" class="form-group">
+                    {% csrf_token %}
+                    <div>
+                        {{form}}
+                    </div>
+            </form>
+        </div>
+    </div>
+    <div class="container mt-1 justify-content-center">
+        <div class="row text-center justify-content-center">
+            <div class="col col-md-4"></div>
+            <div class="col col-md-4 text-center justify-content-center">
+                <nav  aria-label="Постраничная навигация" class="justify-content-center">
+                    <ul class="pagination pagination-sm mx-auto">
+                            {% for i in my_context.elided %}
+                                {% if i == my_context.page_number %}
+                                    <li class="page-item active">
+                                    <a class="page-link" href="?next_page={{ i }}&quant_page={{my_context.quant_page}}">&nbsp;{{ i }}&nbsp;</a>
+                                    </li>
+                                {% elif i == "<" %}
+                                    <li class="page-item">
+                                    <a class="page-link" href="?next_page={{ my_context.page_back }}&quant_page={{my_context.quant_page}}">{{ " < " }}</a>
+                                    </li>
+                                {% elif i == ">" %}
+                                    <li class="page-item">
+                                    <a class="page-link" href="?next_page={{ my_context.page_forward }}&quant_page={{my_context.quant_page}}">{{ " > " }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                    <a class="page-link" href="?next_page={{ i }}&quant_page={{my_context.quant_page}}">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="col col-md-3"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col"></div>
+        <div class="col-7">
+            {% for  str_ in my_context.cntxt_menu %}
+                    <div class="card р-100" style="border:none">
+                          <div class="card-header" style="background-color:silver">
+                              <h2>•{{ str_.title }}</h2>
+                          </div>
+                          <div class="card-body">
+                                <i class="card-text">{{ str_.description }}
+                                </i>
+                          </div>
+                          <div class="card-header" style="background-color:silver">
+                              <div class="row">
+                                  <div class="col col-md-6"><h6>{{ str_.genre }}</h6></div>
+                                  <div class="col col-md-2"></div>
+                                  <div class="col col-md-4"><h4 class="text-right">Цена:{{ str_.cost }}</h4></div>
+                              </div>
+                          </div>
+                          <div class="card-footer" style="background-color:black">
+                              <div class="row">
+                                  <div class="col col-md-8"></div>
+                                  <div class="col col-md-4 d-grid gap-2"">
+                                      <input class="btn btn-light" type="submit" value="В корзину">
+                                  </div>
+                              </div>
+                          </div>
+                    </div>
+            {% endfor %}
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
 {% endblock %}
 </body>
 </html>
